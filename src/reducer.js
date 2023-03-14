@@ -1,3 +1,5 @@
+import { act } from "react-dom/test-utils";
+
 const reducer = (state, action) => {
   if (action.type === "CLEAR_CART") {
     return { ...state, cart: [] };
@@ -53,6 +55,12 @@ const reducer = (state, action) => {
     total = parseFloat(total.toFixed(2));
 
     return { ...state, total, amount };
+  }
+  if (action.type === "LOADING") {
+    return { ...state, loading: true };
+  }
+  if (action.type === "DISPLAY_ITEMS") {
+    return { ...state, loading: false, cart: action.payload };
   }
   return state;
 };
